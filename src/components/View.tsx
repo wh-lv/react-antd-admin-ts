@@ -1,4 +1,4 @@
-import React, { Component, Suspense, ReactNode } from 'react';
+import React, { Component, Suspense, ReactNode, Fragment } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -18,9 +18,9 @@ export class View extends Component {
                     routerList?.map(r => {
                         if (r.children) {
                             return (
-                                <>
+                                <Fragment key={r.key}>
                                     {this.generateRouter(r.children)}
-                                </>
+                                </Fragment>
                             );
                         } else {
                             return (
