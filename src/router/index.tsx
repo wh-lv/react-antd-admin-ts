@@ -2,7 +2,7 @@ import React, { ReactNode, lazy } from 'react';
 
 const Login  = lazy(() => import('../pages/login'));
 const Page404  = lazy(() => import('../pages/Page404'));
-
+const Dashboard = lazy(() => import('../pages/index/Dashboard'));
 interface IRouter {
     title: string
     path: string
@@ -12,7 +12,17 @@ interface IRouter {
     children?: IRouter[]
 }
 
-const router: IRouter[] = [
+export const router: IRouter[] = [
+    {
+        path: "/dashboard",
+        title: "仪表盘",
+        key: "dashboard",
+        component: <Dashboard />
+    },
+    
+];
+
+export const onAuthRouter: IRouter[] = [
     {
         path: "/login",
         title: "登录",
@@ -26,5 +36,4 @@ const router: IRouter[] = [
         component: <Page404 />
     }
 ];
-export default router;
 
