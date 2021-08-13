@@ -15,3 +15,11 @@ export const deleteAdmin = (adminId: number) => {
         method: 'delete'
     });
 }
+
+export const addAdmin = (admin: any) => {
+    return request({
+        url: "/admin/admin/add",
+        method: "post",
+        data: admin
+    });
+}
