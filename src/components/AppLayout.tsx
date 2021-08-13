@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import LeftBar from './LeftBar';
+import SubTitle from './SubTitle'
 
 const { Header, Content } = Layout;
 
@@ -19,11 +20,7 @@ export class AppLayout extends Component {
                 <Layout>
                     <LeftBar />
                     <Layout style={{ padding: '0 24px 24px' }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>Home</Breadcrumb.Item>
-                            <Breadcrumb.Item>List</Breadcrumb.Item>
-                            <Breadcrumb.Item>App</Breadcrumb.Item>
-                        </Breadcrumb>
+                        <SubTitle />
                         <Content
                             className="site-layout-background"
                             style={{
