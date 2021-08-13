@@ -8,3 +8,10 @@ export const getAdminList = (page: number = 1) => {
         }
     })
 }
+
+export const deleteAdmin = (adminId: number) => {
+    return request({
+        url: `/admin/admin/delete/${adminId}`,
+        method: 'delete'
+    });
+}

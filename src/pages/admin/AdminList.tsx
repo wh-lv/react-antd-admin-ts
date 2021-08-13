@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Space, Table } from 'antd';
 import { getAdminList } from '../../api/admin';
+import DeleteAdmin from './DeleteAdmin';
 
 interface IAdmin {
     id: number
@@ -55,6 +56,14 @@ export class AdminList extends Component<any, IState> {
         this.getAdminList(pagination.current);
     }
 
+    deleteAdmin = (id: number) => {
+        this.setState((state) => {
+            return {
+                adminList: state.adminList.filter(admin => admin.id !== id)
+            }
+        })
+    }
+
     render() {
         return (
             <>
@@ -77,10 +86,10 @@ export class AdminList extends Component<any, IState> {
                     <Table.Column
                         title="操作"
                         render={
-                            () => (
+                            (admin: IAdmin) => (
                                 <Space key="operate">
                                     <Button type="primary">编辑</Button>
-                                    <Button type="primary" danger>删除</Button>
+                                    <DeleteAdmin id={admin.id} deleteAdmin={this.deleteAdmin} />
                                 </Space>
                             )
                         }
