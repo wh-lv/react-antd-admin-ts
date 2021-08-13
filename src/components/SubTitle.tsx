@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from 'react'
+import React, { Component, Fragment, ReactNode } from 'react'
 import { Breadcrumb } from 'antd';
 import { IRouter, router } from '../router';
 import { matchPath, RouteComponentProps, withRouter } from 'react-router-dom';
@@ -16,14 +16,14 @@ export class SubTitle extends Component<IProps> {
                         let match = matchPath(path, { path: r.path });
                         if (match) {
                             return (
-                                <>
+                                <Fragment key={path}>
                                     <Breadcrumb.Item>{r.title}</Breadcrumb.Item>
                                     {
                                         r.children ?
                                             this.generate(r.children) :
                                             null
                                     }
-                                </>
+                                </Fragment>
                             )
                         }
                         return null;

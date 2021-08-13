@@ -39,7 +39,7 @@ export class AddAdmin extends Component<IProps> {
             <Modal
                 title="添加管理员"
                 visible={this.props.visible}
-                onCancel={() => this.props.callback}
+                onCancel={() => this.props.callback()}
                 footer={false}
             >
                 <Form

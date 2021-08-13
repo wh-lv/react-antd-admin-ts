@@ -1,13 +1,53 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
-import { IRouter, router } from '../router';
+import { Link, matchPath, RouteComponentProps, withRouter } from 'react-router-dom';
+import { IRouter, leftRouter, router } from '../router';
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
 
-export class LeftBar extends Component {
+interface IState {
+    defaultOpenKeys: string[]
+    defaultSelectedKeys: string[]
+}
+interface IProps extends RouteComponentProps {
+
+}
+
+export class LeftBar extends Component<IProps, IState> {
+
+    constructor(props: IProps, context: any) {
+        super(props, context);
+        this.state = {
+            defaultOpenKeys: [],
+            defaultSelectedKeys: []
+        }
+    }
+
+    componentDidMount() {
+        this.heightMenu(leftRouter);
+    }
+
+    heightMenu = (leftRoutes: IRouter[]) => {
+        let path = this.props.location.pathname;
+        console.log(path);
+        for (let r of leftRoutes) {
+            let match = matchPath(path, { path: r.path });
+            if (match) {
+                if (match.isExact) {
+                    this.setState({
+                        defaultSelectedKeys: [r.key]
+                    });
+                } else {
+                    this.setState({ defaultOpenKeys: [r.key] });
+                }
+            }
+            if (r.children) {
+                this.heightMenu(r.children);
+            }
+        }
+    }
 
     generateMenu = (routerList?: IRouter[]) => {
         return (
@@ -39,18 +79,23 @@ export class LeftBar extends Component {
         return (
             <>
                 <Sider width={200} className="site-layout-background">
-                    <Menu
-                        mode="inline"
-                        defaultSelectedKeys={['dashboard']}
-                        defaultOpenKeys={['sub1']}
-                        style={{ height: '100%', borderRight: 0 }}
-                    >
-                        {this.generateMenu(router)}
-                    </Menu>
+                    {
+                        this.state.defaultSelectedKeys.length > 0 ?
+                            <Menu
+                                mode="inline"
+                                defaultSelectedKeys={this.state.defaultSelectedKeys}
+                                defaultOpenKeys={this.state.defaultOpenKeys}
+                                style={{ height: '100%', borderRight: 0 }}
+                            >
+                                {this.generateMenu(router)}
+                            </Menu>
+                            :
+                            null
+                    }
                 </Sider>
             </>
         )
     };
 };
 
-export default LeftBar;
+export default withRouter(LeftBar);
