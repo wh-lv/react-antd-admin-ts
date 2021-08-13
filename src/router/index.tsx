@@ -6,6 +6,7 @@ const Page404  = lazy(() => import('../pages/Page404'));
 const Dashboard = lazy(() => import('../pages/index/Dashboard'));
 const UserList = lazy(() => import('../pages/user/UserList'));
 const AdminList = lazy(() => import('../pages/admin/AdminList'));
+const RoleList = lazy(() => import('../pages/role/RoleList'));
 
 export interface IRouter {
     title: string
@@ -52,6 +53,21 @@ export const leftRouter: IRouter[] = [
                 key: "adminList",
                 icon: <UserOutlined />,
                 component: <AdminList />,
+            }
+        ]
+    },
+    {
+        path: "/admin/role",
+        title: "角色管理",
+        key: "role",
+        icon: <UserOutlined />,
+        children: [
+            {
+                path: "/admin/role/list",
+                title: "管理员列表",
+                key: "roleList",
+                icon: <UserOutlined />,
+                component: <RoleList />,
             }
         ]
     },
