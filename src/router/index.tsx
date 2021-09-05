@@ -27,7 +27,7 @@ export const leftRouter: IRouter[] = [
         component: <Dashboard />
     },
     {
-        path: "/admin/user",
+        path: "/admin/user", 
         title: "用户管理",
         key: "user",
         icon: <UserOutlined />,
